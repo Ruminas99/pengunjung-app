@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
+<div class="relative min-h-screen w-full flex items-center justify-center overflow-hidden ">
 
     <div class="absolute inset-0 bg-cover bg-center filter blur-sm scale-110 z-0"
          style="background-image: url('https://img.freepik.com/premium-photo/indonesia-flag-mast_28799-28.jpg');">
@@ -22,8 +22,9 @@
                 class="w-full px-3 py-2 mb-4 border rounded" required>
 
             <button type="submit"
-                class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                Login
+            class="w-full bg-blue-600 text-white py-2 rounded transition duration-200 transform 
+                   hover:scale-105 active:scale-95">
+            Login
             </button>
         </form>
 

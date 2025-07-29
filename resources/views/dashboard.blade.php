@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="bg-white p-6 rounded shadow-md w-full max-w-lg text-center">
+<div class="bg-white p-6 rounded shadow-md w-full max-w-lg text-center animate__animated animate__fadeIn">
     <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
 
     <p class="mb-4">Halo, <strong>{{ auth()->user()->name }}</strong>! Kamu berhasil login.</p>

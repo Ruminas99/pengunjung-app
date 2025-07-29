@@ -19,7 +19,8 @@
             class="w-full px-3 py-2 mb-4 border rounded" required>
 
         <button type="submit"
-            class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700">
+            class="w-full bg-blue-600 text-white py-2 rounded transition duration-200 transform 
+                   hover:scale-105 active:scale-95">
             Register
         </button>
     </form>

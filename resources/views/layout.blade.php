@@ -18,7 +18,7 @@
         }
     </style>
   </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gradient-to-r from-indigo-500 to-teal-400 min-h-screen text-white">
 
     @yield('content')
 

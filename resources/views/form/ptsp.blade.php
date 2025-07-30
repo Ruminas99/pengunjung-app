@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10 animate__animated animate__fadeIn">
+<div class="min-h-screen bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center px-4 py-10 animate__animated animate__fadeIn">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Form PTSP</h2>
         <form action="#" method="POST" class="space-y-5">

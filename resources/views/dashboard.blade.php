@@ -1,17 +1,10 @@
 @extends('layout')
 
 @section('content')
-<div class="bg-white p-6 rounded shadow-md w-full max-w-lg text-center animate__animated animate__fadeIn">
-    <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+@include('navbar')
 
-    <p class="mb-4">Halo, <strong>{{ auth()->user()->name }}</strong>! Kamu berhasil login.</p>
-
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit"
-            class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
-            Logout
-        </button>
-    </form>
+<div class="p-6">
+    <h1 class="text-2xl font-bold mb-4">Selamat Datang, {{ auth()->user()->name }}</h1>
+    <p class="text-gray-600">Ini adalah halaman Beranda setelah login.</p>
 </div>
 @endsection

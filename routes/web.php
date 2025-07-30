@@ -18,5 +18,12 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.store');
 // PROTECTED ROUTES
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/pihak', fn () => view('pihak'))->name('pihak');
+    Route::get('/mahasiswa', fn () => view('mahasiswa'))->name('mahasiswa');
+    Route::get('/dinas', fn () => view('dinas'))->name('dinas');
+    Route::get('/ptsp', fn () => view('ptsp'))->name('ptsp');
+    Route::get('/laporan', fn () => view('laporan'))->name('laporan');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+

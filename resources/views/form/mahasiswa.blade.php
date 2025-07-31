@@ -3,7 +3,7 @@
 <div class="min-h-screen bg-gradient-to-r from-pink-500 to-pink-700 flex items-center justify-center px-4 py-10 animate__animated animate__fadeIn">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 class="text-2xl font-bold text-center mb-6">Form Mahasiswa</h2>
-        <form action="#" method="POST" class="space-y-5">   
+        <form action="{{ route('mahasiswa.store') }}" method="POST" class="space-y-5">   
             @csrf
             <div>
                 <label for="nama" class="block mb-1 font-medium text-gray-700">Nama</label>

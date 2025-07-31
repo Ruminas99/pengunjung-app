@@ -4,7 +4,7 @@
 <div class="min-h-screen flex  items-center justify-center bg-gradient-to-r from-blue-500 to-blue-700 py-12 px-4 sm:px-6 lg:px-8 animate__animated animate__fadeIn">
     <div class="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
         <h2 class="text-center text-2xl font-bold text-gray-900">Form Data Pihak</h2>
-        <form action="" method="POST" class="space-y-5">
+        <form action="{{ route('pihak.store') }}" method="POST" class="space-y-5">
             @csrf
             <div>
                 <label for="nomor_perkara" class="block text-sm font-medium text-gray-700">Nomor Perkara</label>

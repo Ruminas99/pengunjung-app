@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -12,7 +13,9 @@ Route::get('/', function () {
     Route::get('/mahasiswa', fn () => view('form/mahasiswa'))->name('mahasiswa');
     Route::get('/dinas', fn () => view('form/dinas'))->name('dinas');
     Route::get('/ptsp', fn () => view('form/ptsp'))->name('ptsp');
-    Route::get('/laporan', fn () => view('laporan'))->name('laporan');
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+
+
 
     Route::post('/pihak', [FormController::class, 'storePihak'])->name('pihak.store');
     Route::post('/dinas', [FormController::class, 'storeDinas'])->name('dinas.store');

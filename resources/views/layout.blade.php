@@ -13,12 +13,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @stack('styles')
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* slate-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; /* slate-600 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* slate-500 */
+        }
         .animate-fade {
             animation: fadeIn 0.5s ease-in-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+        .hidden {
+            display: none;
         }
         .input-field {
             @apply w-full px-4 py-2 border border-gray-300 rounded-lg transition duration-300 transform focus:outline-none focus:ring-2 focus:ring-blue-500 focus:scale-105 animate__animated animate__fadeInUp;
@@ -55,7 +76,7 @@
         }
     </style>
   </head>
-<body class="bg-gradient-to-r from-indigo-500 to-teal-400 min-h-screen">
+<body class="bg-slate-900 text-gray-300 min-h-screen">
     <nav class="absolute top-0 left-0 right-0 z-10 p-4">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-center h-16">

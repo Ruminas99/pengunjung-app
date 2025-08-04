@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>BUTET</title>
@@ -7,7 +8,7 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,75 +16,133 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            background-color: #0c0a18;
+            /* Warna dasar jika gradien tidak didukung */
+            overflow-x: hidden;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        /* Latar Belakang Gradien Jala (Mesh Gradient) yang Bergerak */
+        .animated-gradient-bg {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: radial-gradient(at 20% 80%, hsla(210, 100%, 60%, 0.4) 0px, transparent 50%),
+                radial-gradient(at 80% 10%, hsla(220, 100%, 70%, 0.35) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, hsla(200, 100%, 65%, 0.45) 0px, transparent 50%);
+            animation: gradient-move 20s ease infinite;
         }
-        ::-webkit-scrollbar-track {
-            background: #1e293b; /* slate-800 */
+
+        @keyframes gradient-move {
+
+            0%,
+            100% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
         }
-        ::-webkit-scrollbar-thumb {
-            background: #475569; /* slate-600 */
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b; /* slate-500 */
-        }
-        .animate-fade {
-            animation: fadeIn 0.5s ease-in-out;
-        }
+
+        /* Animasi kustom */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .hidden {
-            display: none;
-        }
-        .input-field {
-            @apply w-full px-4 py-2 border border-gray-300 rounded-lg transition duration-300 transform focus:outline-none focus:ring-2 focus:ring-blue-500 focus:scale-105 animate__animated animate__fadeInUp;
-        }
-
-        .submit-btn {
-            @apply w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 active:scale-95;
-        }
-        @keyframes pageEnter {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(-15px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        @keyframes pageExit {
+
+        @keyframes popIn {
             from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: scale(0.95) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
 
-        /* Class untuk memicu animasi keluar */
-        .page-exit-animation {
-            animation: pageExit 0.5s ease-in-out forwards;
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-pop-in {
+            animation: popIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stagger-1 {
+            animation-delay: 0.4s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.5s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.6s;
+        }
+
+        .stagger-4 {
+            animation-delay: 0.7s;
+        }
+
+        /* Efek Kilau Interaktif pada Kartu */
+        .interactive-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            /* Sesuai dengan rounded-xl */
+            padding: 1px;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(96, 165, 250, 0.4), transparent 80%);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interactive-card:hover::before {
+            opacity: 1;
         }
     </style>
-  </head>
-<body class="bg-slate-900 text-gray-300 min-h-screen">
+</head>
+
+<body class="bg-gradient-to-br from-blue-900 to-slate-900 text-gray-100">
     <nav class="absolute top-0 left-0 right-0 z-10 p-4">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-center h-16">
                 <!-- Wadah Tombol dengan Efek Kaca Buram (Frosted Glass) -->
-                <div class="flex items-baseline space-x-2 bg-black/20 backdrop-blur-sm border border-white/10 shadow-lg rounded-full p-2">
-                    <a href="{{ route('dashboard') }}" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200" :class="window.location.href.includes('dashboard') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Beranda</a>
-                    <a href="{{ route('laporan') }}" class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200" :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Laporan</a>
+                <div
+                    class="flex items-baseline space-x-2 bg-black/20 backdrop-blur-sm border border-white/10 shadow-lg rounded-full p-2">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
+                        :class="window.location.href.includes('dashboard') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Beranda</a>
+                    <a href="{{ route('laporan') }}"
+                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
+                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Laporan</a>
                 </div>
             </div>
         </div>
@@ -107,8 +166,8 @@
                     link.classList.add('text-white', 'hover:bg-white/20');
                 }
 
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); 
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
                     const destination = this.href;
 
                     if (destination === window.location.href || destination.endsWith('#')) {
@@ -124,4 +183,5 @@
         });
     </script>
 </body>
+
 </html>

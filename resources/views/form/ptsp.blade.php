@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('content')
-<div class="relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in">
+<div class="animated-gradient-bg relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
 
-    <header class="mb-8 text-center">
+    <header class="mb-8 text-center animate-pop-in stagger-1">
         <h2 class="text-3xl font-bold text-white">Formulir Tamu PTSP</h2>
         <p class="text-blue-300 mt-2">Silakan isi data tamu dengan benar.</p>
     </header>
 
-    <form action="{{ route('ptsp.store') }}" method="POST" class="space-y-6 w-full max-w-xl bg-white/10 p-6 rounded-xl shadow-lg animate-pop-in">
+    <form action="{{ route('ptsp.store') }}" method="POST" class="space-y-6 w-full max-w-xl bg-white/10 p-6 rounded-xl shadow-lg animate-pop-in stagger-2">
         @csrf
 
         <div>

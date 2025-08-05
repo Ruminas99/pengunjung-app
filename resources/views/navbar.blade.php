@@ -4,3 +4,4 @@
         <a href="{{ route('laporan') }}" class="text-gray-800 font-medium hover:underline">Laporan</a>
     </div>
 </nav>
+dsadsaa

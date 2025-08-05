@@ -5,17 +5,12 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\LaporanController;
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('laporan');
 });
 
-    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
-    Route::get('/pihak', fn () => view('form/pihak'))->name('pihak');
-    Route::get('/mahasiswa', fn () => view('form/mahasiswa'))->name('mahasiswa');
-    Route::get('/dinas', fn () => view('form/dinas'))->name('dinas');
-    Route::get('/ptsp', fn () => view('form/ptsp'))->name('ptsp');
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
-
-
+    Route::get('/bulanan', [LaporanController::class, 'laporanBulanan'])->name('laporanbulanan');
+    
 
     Route::post('/pihak', [FormController::class, 'storePihak'])->name('pihak.store');
     Route::post('/dinas', [FormController::class, 'storeDinas'])->name('dinas.store');

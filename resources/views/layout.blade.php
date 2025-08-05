@@ -29,23 +29,29 @@
             top: 0;
             left: 0;
             z-index: -1;
-            background: radial-gradient(at 20% 80%, hsla(210, 100%, 60%, 0.4) 0px, transparent 50%),
-                radial-gradient(at 80% 10%, hsla(220, 100%, 70%, 0.35) 0px, transparent 50%),
-                radial-gradient(at 50% 50%, hsla(200, 100%, 65%, 0.45) 0px, transparent 50%);
-            animation: gradient-move 20s ease infinite;
+            background:
+                radial-gradient(at 30% 70%, hsla(210, 100%, 60%, 0.45) 0px, transparent 60%),
+                radial-gradient(at 70% 30%, hsla(200, 100%, 70%, 0.4) 0px, transparent 60%),
+                radial-gradient(at 50% 50%, hsla(220, 100%, 55%, 0.3) 0px, transparent 70%),
+                radial-gradient(at 80% 80%, hsla(195, 100%, 65%, 0.2) 0px, transparent 60%);
+            background-size: 200% 200%;
+            animation: gradient-move 25s ease infinite;
         }
 
         @keyframes gradient-move {
-
-            0%,
-            100% {
-                background-position: 0% 0%;
+            0% {
+                background-position: 0% 50%;
             }
 
             50% {
-                background-position: 100% 100%;
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
             }
         }
+
 
         /* Animasi kustom */
         @keyframes fadeIn {
@@ -127,6 +133,47 @@
         .interactive-card:hover::before {
             opacity: 1;
         }
+
+        @keyframes gradient-move {
+
+            0%,
+            100% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* Animasi kustom */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efek Kartu Kaca Interaktif */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 60, 120, 0.25), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+        }
     </style>
 </head>
 
@@ -134,15 +181,14 @@
     <nav class="absolute top-0 left-0 right-0 z-10 p-4">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center justify-center h-16">
-                <!-- Wadah Tombol dengan Efek Kaca Buram (Frosted Glass) -->
                 <div
                     class="flex items-baseline space-x-2 bg-black/20 backdrop-blur-sm border border-white/10 shadow-lg rounded-full p-2">
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
-                        :class="window.location.href.includes('dashboard') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Beranda</a>
                     <a href="{{ route('laporan') }}"
                         class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
-                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Laporan</a>
+                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Harian</a>
+                    <a href="{{ route('laporanbulanan') }}"
+                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
+                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Bulanan</a>
                 </div>
             </div>
         </div>

@@ -28,37 +28,45 @@ class LaporanController extends Controller
         $jumlahPihak = Pihak::whereDate('created_at', $today)->count();
 
         // Daftar terbaru
-        $daftarTerbaru = collect()
-        ->merge(Dinas::orderBy('created_at', 'desc')->take(5)->get()->map(function ($item) {
-            return [
-                'nama' => $item->nama,
-                'waktu' => $item->created_at,
-                'keterangan' => 'Tamu Dinas - ' . $item->ke_bagian,
-            ];
-        }))
-        ->merge(Ptsp::orderBy('created_at', 'desc')->take(5)->get()->map(function ($item) {
-            return [
-                'nama' => $item->nama,
-                'waktu' => $item->created_at,
-                'keterangan' => 'Tamu PTSP - Meja ' . $item->ke_meja,
-            ];
-        }))
-        ->merge(Mahasiswa::orderBy('created_at', 'desc')->take(5)->get()->map(function ($item) {
-            return [
-                'nama' => $item->nama,
-                'waktu' => $item->created_at,
-                'keterangan' => 'Mahasiswa - ' . $item->universitas,
-            ];
-        }))
-        ->merge(Pihak::orderBy('created_at', 'desc')->take(5)->get()->map(function ($item) {
-            return [
-                'nama' => $item->nama_pihak,
-                'waktu' => $item->created_at,
-                'keterangan' => 'Pihak - No. Perkara: ' . $item->nomor_perkara,
-            ];
-        }))
-        ->sortByDesc('waktu')
-        ->take(10);
+       $daftarHariIniLengkap = collect();
+
+$daftarHariIniLengkap = $daftarHariIniLengkap->merge(Dinas::whereDate('created_at', $today)->get()->map(function ($item) {
+    return [
+        'jenis' => 'Dinas',
+        'nama' => $item->nama,
+        'keterangan' => 'Tamu Dinas - ' . $item->ke_bagian,
+        'waktu' => $item->created_at,
+    ];
+}));
+
+$daftarHariIniLengkap = $daftarHariIniLengkap->merge(Ptsp::whereDate('created_at', $today)->get()->map(function ($item) {
+    return [
+        'jenis' => 'PTSP',
+        'nama' => $item->nama,
+        'keterangan' => 'Tamu PTSP - Meja ' . $item->ke_meja,
+        'waktu' => $item->created_at,
+    ];
+}));
+
+$daftarHariIniLengkap = $daftarHariIniLengkap->merge(Mahasiswa::whereDate('created_at', $today)->get()->map(function ($item) {
+    return [
+        'jenis' => 'Mahasiswa',
+        'nama' => $item->nama,
+        'keterangan' => 'Mahasiswa - ' . $item->universitas,
+        'waktu' => $item->created_at,
+    ];
+}));
+
+$daftarHariIniLengkap = $daftarHariIniLengkap->merge(Pihak::whereDate('created_at', $today)->get()->map(function ($item) {
+    return [
+        'jenis' => 'Pihak',
+        'nama' => $item->nama_pihak,
+        'keterangan' => 'No. Perkara: ' . $item->nomor_perkara,
+        'waktu' => $item->created_at,
+    ];
+}));
+
+$daftarHariIniLengkap = $daftarHariIniLengkap->sortByDesc('waktu');
 
         $dataBulananLengkap = collect();
 
@@ -106,8 +114,100 @@ class LaporanController extends Controller
         'jumlahPtsp',
         'jumlahMahasiswa',
         'jumlahPihak',
-        'daftarTerbaru',
-        'dataBulananLengkap'
+        'dataBulananLengkap',
+        'daftarHariIniLengkap'
     ));
     }
+
+ public function laporanBulanan()
+    {
+        // Mengambil bulan dan tahun saat ini untuk query yang akurat
+        $now = Carbon::now();
+        $currentMonth = $now->month;
+        $currentYear = $now->year;
+
+        // --- Mengambil Data & Menghitung Jumlah per Jenis Tamu ---
+
+        // 1. Tamu Dinas
+        $dataDinas = Dinas::whereYear('created_at', $currentYear)
+                          ->whereMonth('created_at', $currentMonth)
+                          ->get();
+        $jumlahDinas = $dataDinas->count();
+
+        // 2. Tamu PTSP
+        $dataPtsp = Ptsp::whereYear('created_at', $currentYear)
+                        ->whereMonth('created_at', $currentMonth)
+                        ->get();
+        $jumlahPtsp = $dataPtsp->count();
+
+        // 3. Tamu Mahasiswa
+        $dataMahasiswa = Mahasiswa::whereYear('created_at', $currentYear)
+                                  ->whereMonth('created_at', $currentMonth)
+                                  ->get();
+        $jumlahMahasiswa = $dataMahasiswa->count();
+
+        // 4. Tamu Pihak (Sidang)
+        $dataPihak = Pihak::whereYear('created_at', $currentYear)
+                         ->whereMonth('created_at', $currentMonth)
+                         ->get();
+        $jumlahPihak = $dataPihak->count();
+
+
+        // --- Memformat dan Menggabungkan Semua Data ---
+
+        $dinasFormatted = $dataDinas->map(function ($item) {
+            return [
+                'jenis' => 'Dinas',
+                'nama' => $item->nama,
+                'keterangan' => 'Tamu Dinas - ' . $item->ke_bagian,
+                'waktu' => $item->created_at,
+            ];
+        });
+
+        $ptspFormatted = $dataPtsp->map(function ($item) {
+            return [
+                'jenis' => 'PTSP',
+                'nama' => $item->nama,
+                'keterangan' => 'Tamu PTSP - Meja ' . $item->ke_meja,
+                'waktu' => $item->created_at,
+            ];
+        });
+
+        $mahasiswaFormatted = $dataMahasiswa->map(function ($item) {
+            return [
+                'jenis' => 'Mahasiswa',
+                'nama' => $item->nama,
+                'keterangan' => 'Mahasiswa - ' . $item->universitas,
+                'waktu' => $item->created_at,
+            ];
+        });
+
+        $pihakFormatted = $dataPihak->map(function ($item) {
+            return [
+                'jenis' => 'Pihak',
+                'nama' => $item->nama_pihak,
+                'keterangan' => 'No. Perkara: ' . $item->nomor_perkara,
+                'waktu' => $item->created_at,
+            ];
+        });
+
+        // Menggabungkan semua data yang sudah diformat dan mengurutkannya
+        $dataBulananLengkap = collect()
+            ->merge($dinasFormatted)
+            ->merge($ptspFormatted)
+            ->merge($mahasiswaFormatted)
+            ->merge($pihakFormatted)
+            ->sortByDesc('waktu');
+
+        // Mengirim semua data yang diperlukan ke view
+        return view('laporanbulanan', compact(
+            'dataBulananLengkap',
+            'jumlahDinas',
+            'jumlahPtsp',
+            'jumlahMahasiswa',
+            'jumlahPihak'
+        ));
+    }
 }
+
+

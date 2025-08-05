@@ -140,9 +140,6 @@
                     <a href="{{ route('dashboard') }}"
                         class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
                         :class="window.location.href.includes('dashboard') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Beranda</a>
-                    <a href="{{ route('laporan') }}"
-                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
-                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Laporan</a>
                 </div>
             </div>
         </div>
@@ -182,6 +179,7 @@
             });
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

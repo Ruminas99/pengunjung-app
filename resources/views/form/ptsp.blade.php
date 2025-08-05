@@ -1,33 +1,50 @@
 @extends('layout')
+
 @section('content')
-<div class="min-h-screen flex items-center justify-center px-4 py-10 animate__animated animate__fadeIn">
-    <div class="bg-slate-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center text-white mb-6">Form PTSP</h2>
-        <form action="{{ route('ptsp.store') }}" method="POST" class="space-y-5">
-            @csrf
-            <div>
-                <label for="nik" class="block mb-1 font-medium text-white">NIK</label>
-                <input type="text" id="nik" name="nik" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-            </div>
-            <div>
-                <label for="nama" class="block mb-1 font-medium text-white">Nama</label>
-                <input type="text" id="nama" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-            </div>
-            <div>
-                <label for="no_hp" class="block mb-1 font-medium text-white">Nomor HP</label>
-                <input type="text" id="no_hp" name="no_hp" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-            </div>
-            <div>
-                <label for="meja" class="block mb-1 font-medium text-white">Ke Meja PTSP</label>
-                <select id="meja" name="ke_meja" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                    <option value="">-- Pilih Meja --</option>
-                    <option value="1">Meja 1</option>
-                    <option value="2">Meja 2</option>
-                    <option value="3">Meja 3</option>
-                </select>
-            </div>
-            <button type="submit" class="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-600 transition duration-200 transform hover:scale-105 active:scale-95">Submit</button>
-        </form>
-    </div>
+<div class="relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in">
+
+    <header class="mb-8 text-center">
+        <h2 class="text-3xl font-bold text-white">Formulir Tamu PTSP</h2>
+        <p class="text-blue-300 mt-2">Silakan isi data tamu dengan benar.</p>
+    </header>
+
+    <form action="{{ route('ptsp.store') }}" method="POST" class="space-y-6 w-full max-w-xl bg-white/10 p-6 rounded-xl shadow-lg animate-pop-in">
+        @csrf
+
+        <div>
+            <label for="nik" class="block text-sm font-medium text-blue-200">NIK</label>
+            <input type="text" id="nik" name="nik" required
+                class="mt-1 block w-full rounded-md border border-gray-400 bg-white/20 text-white shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div>
+            <label for="nama" class="block text-sm font-medium text-blue-200">Nama</label>
+            <input type="text" id="nama" name="nama" required
+                class="mt-1 block w-full rounded-md border border-gray-400 bg-white/20 text-white shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div>
+            <label for="no_hp" class="block text-sm font-medium text-blue-200">Nomor HP</label>
+            <input type="text" id="no_hp" name="no_hp" required
+                class="mt-1 block w-full rounded-md border border-gray-400 bg-white/20 text-white shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div>
+            <label for="ke_meja" class="block text-sm font-medium text-blue-200">Ke Meja PTSP</label>
+            <select id="ke_meja" name="ke_meja" required
+                class="mt-1 block w-full rounded-md border border-gray-400 bg-white/20 text-white shadow-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="" class="text-black">-- Pilih Meja --</option>
+                <option value="1" class="text-black">Meja 1</option>
+                <option value="2" class="text-black">Meja 2</option>
+                <option value="3" class="text-black">Meja 3</option>
+                <option value="4" class="text-black">Meja 4</option>
+            </select>
+        </div>
+
+        <button type="submit"
+            class="w-full bg-teal-600 text-white py-2 rounded-lg transition duration-200 transform hover:scale-105 active:scale-95">
+            Kirim
+        </button>
+    </form>
 </div>
 @endsection

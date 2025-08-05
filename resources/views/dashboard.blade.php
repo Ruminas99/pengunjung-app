@@ -2,15 +2,14 @@
 
 @section('content')
 
- <div class="animated-gradient-bg"></div>
+<div class="animated-gradient-bg"></div>
 
     <div class="relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in">
         
         <!-- Header -->
         <header class="mb-10 text-center">
-            <img src="{{ asset('image/logo.png') }}" alt="Logo Pengadilan" class="h-32 sm:h-40 mx-auto rounded-full shadow-2xl shadow-blue-500/20 border-4 border-white/20">
+            <img src="{{ asset('image/logo-beranda.png') }}" alt="Logo Si Butet" class="h-32 sm:h-70 mx-auto rounded-full shadow-2xl shadow-blue-500/20 border-4 border-white/20">
             <h1 class="text-3xl md:text-4xl font-bold text-white mt-6 tracking-tight">Pengadilan Tata Usaha Negara Medan</h1>
-            <p class="text-lg text-blue-300 mt-2">Buku Tamu Elektronik</p>
         </header>
 
         <!-- Konten Utama -->
@@ -70,6 +69,10 @@
 
             </div>
         </main>
+
+        <footer class="mt-10 text-center">
+            <img src="{{ asset('image/logo.png') }}" alt="Logo Pengadilan" class="h-32 sm:h-40 mx-auto rounded-full shadow-2xl shadow-blue-500/20 border-4 border-white/20">
+        </footer>
     </div>
 
     <script>

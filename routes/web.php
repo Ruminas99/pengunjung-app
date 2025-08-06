@@ -16,6 +16,7 @@ Route::get('/', function () {
     Route::get('/dinas', fn () => view('form/dinas'))->name('dinas');
     Route::get('/ptsp', fn () => view('form/ptsp'))->name('ptsp');
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+    Route::get('/kehadiran', fn () => view('kehadiran'))->name('kehadiran');
 
 
 

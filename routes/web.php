@@ -27,3 +27,9 @@ Route::get('/', function () {
 
     Route::get('/get-pihak/{id}', [PihakController::class, 'getPihak']);
 
+<<<<<<< HEAD
+=======
+    Route::get('/kehadiran', [PihakController::class, 'kehadiran'])->name('pihak.kehadiran');
+    Route::get('/kehadiran/{nomor_perkara}', [PihakController::class, 'kehadiranByPerkara'])->name('pihak.kehadiran.perkara');
+    Route::get('/kehadiran/{perkara_id?}', [PihakController::class, 'kehadiran'])->name('kehadiran.index');
+>>>>>>> efb13bd (kehadiran)

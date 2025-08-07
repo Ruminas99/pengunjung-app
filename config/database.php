@@ -34,6 +34,22 @@ return [
     */
 
     'connections' => [
+<<<<<<< HEAD
+=======
+        'sipp' => [
+            'driver' => 'mysql',
+            'host' => env('DB_SIPP_HOST', '127.0.0.1'),
+            'port' => env('DB_SIPP_PORT', '3306'),
+            'database' => env('DB_SIPP_DATABASE', 'sipp'),
+            'username' => env('DB_SIPP_USERNAME', 'root'),
+            'password' => env('DB_SIPP_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+>>>>>>> efb13bd (kehadiran)
 
         'sqlite' => [
             'driver' => 'sqlite',

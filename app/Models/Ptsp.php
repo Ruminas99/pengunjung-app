@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ptsp extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
+=======
+    protected $connection = 'mysql';
+>>>>>>> efb13bd (kehadiran)
     protected $fillable = [
         'nik',
         'nama',

@@ -16,6 +16,7 @@ Route::get('/', function () {
     Route::get('/dinas', fn () => view('form/dinas'))->name('dinas');
     Route::get('/ptsp', fn () => view('form/ptsp'))->name('ptsp');
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+    Route::get('/kehadiran', fn () => view('kehadiran'))->name('kehadiran');
 
 
 
@@ -26,3 +27,6 @@ Route::get('/', function () {
 
     Route::get('/get-pihak/{id}', [PihakController::class, 'getPihak']);
 
+    Route::get('/kehadiran', [PihakController::class, 'kehadiran'])->name('pihak.kehadiran');
+    Route::get('/kehadiran/{nomor_perkara}', [PihakController::class, 'kehadiranByPerkara'])->name('pihak.kehadiran.perkara');
+    Route::get('/kehadiran/{perkara_id?}', [PihakController::class, 'kehadiran'])->name('kehadiran.index');

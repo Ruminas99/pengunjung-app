@@ -178,21 +178,6 @@
 </head>
 
 <body class="bg-gradient-to-br from-blue-900 to-slate-900 text-gray-100">
-    <nav class="absolute top-0 left-0 right-0 z-10 p-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex items-center justify-center h-16">
-                <div
-                    class="flex items-baseline space-x-2 bg-black/20 backdrop-blur-sm border border-white/10 shadow-lg rounded-full p-2">
-                    <a href="{{ route('laporan') }}"
-                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
-                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Harian</a>
-                    <a href="{{ route('laporanbulanan') }}"
-                        class="nav-link px-4 py-2 rounded-full text-sm font-medium transition duration-200"
-                        :class="window.location.href.includes('laporan') ? 'bg-white text-gray-800' : 'text-white hover:bg-white/20'">Bulanan</a>
-                </div>
-            </div>
-        </div>
-    </nav>
     <main id="main-content">
         @yield('content')
     </main>
@@ -228,6 +213,7 @@
             });
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

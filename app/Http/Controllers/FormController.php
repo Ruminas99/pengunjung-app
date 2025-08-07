@@ -7,6 +7,7 @@ use App\Models\Pihak;
 use App\Models\Dinas;
 use App\Models\Ptsp;
 use App\Models\Mahasiswa;
+use Carbon\Carbon;
 class FormController extends Controller
 {
     public function storePihak(Request $request)
@@ -17,7 +18,11 @@ class FormController extends Controller
             'pihak_hadir' => 'required|string|max:255',
         ]);
 
-        Pihak::create($request->all());
+        $data = $request->all();
+        $data['created_at'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        $data['updated_at'] = $data['created_at'];
+
+        Pihak::create($data);
         return back()->with('success', 'Data pihak berhasil disimpan.');
     }
 
@@ -29,7 +34,11 @@ class FormController extends Controller
             'ke_bagian' => 'required|string|max:255',
         ]);
 
-        Dinas::create($request->all());
+        $data = $request->all();
+        $data['created_at'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        $data['updated_at'] = $data['created_at'];
+
+        Dinas::create($data);
         return back()->with('success', 'Data dinas berhasil disimpan.');
     }
 
@@ -42,7 +51,11 @@ class FormController extends Controller
             'ke_meja' => 'required|string|max:10',
         ]);
 
-        Ptsp::create($request->all());
+        $data = $request->all();
+        $data['created_at'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        $data['updated_at'] = $data['created_at'];
+
+        Ptsp::create($data);
         return back()->with('success', 'Data PTSP berhasil disimpan.');
     }
 
@@ -55,7 +68,11 @@ class FormController extends Controller
             'jumlah_klinis' => 'required|integer|min:1',
         ]);
 
-        Mahasiswa::create($request->all());
+        $data = $request->all();
+        $data['created_at'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        $data['updated_at'] = $data['created_at'];
+
+        Mahasiswa::create($data);
         return back()->with('success', 'Data mahasiswa berhasil disimpan.');
     }
 }

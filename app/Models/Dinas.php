@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Dinas extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
+
     protected $fillable = [
         'nama',
         'nama_kantor',

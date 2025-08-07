@@ -34,8 +34,6 @@ return [
     */
 
     'connections' => [
-<<<<<<< HEAD
-=======
         'sipp' => [
             'driver' => 'mysql',
             'host' => env('DB_SIPP_HOST', '127.0.0.1'),
@@ -49,7 +47,6 @@ return [
             'strict' => true,
             'engine' => null,
         ],
->>>>>>> efb13bd (kehadiran)
 
         'sqlite' => [
             'driver' => 'sqlite',

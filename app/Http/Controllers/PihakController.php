@@ -5,21 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
-=======
 
->>>>>>> efb13bd (kehadiran)
 class PihakController extends Controller
 {
     public function create()
     {
         $today = Carbon::today()->toDateString();
 
-<<<<<<< HEAD
-        $perkaras = DB::table('perkara')
-=======
+
         $perkaras = DB::connection('sipp')->table('perkara')
->>>>>>> efb13bd (kehadiran)
             ->join('jadwalsidangweb', 'perkara.perkara_id', '=', 'jadwalsidangweb.IDPerkara')
             ->whereDate('jadwalsidangweb.tglSidang', $today)
             ->select('perkara.perkara_id', 'perkara.nomor_perkara')
@@ -28,17 +22,11 @@ class PihakController extends Controller
 
         return view('form.pihak', compact('perkaras'));
     }
-<<<<<<< HEAD
-    
-    public function getPihak($id)
-    {
-        $perkara = DB::table('perkara')->where('perkara_id', $id)->first();
-=======
 
     public function getPihak($id)
     {
         $perkara = DB::connection('sipp')->table('perkara')->where('perkara_id', $id)->first();
->>>>>>> efb13bd (kehadiran)
+
 
         $pihakList = [];
 
@@ -59,9 +47,6 @@ class PihakController extends Controller
 
         return response()->json($pihakList);
     }
-<<<<<<< HEAD
-}
-=======
 
     public function kehadiran($perkara_id = null)
     {
@@ -168,4 +153,3 @@ class PihakController extends Controller
         ]);
     }
 }
->>>>>>> efb13bd (kehadiran)

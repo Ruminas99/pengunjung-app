@@ -6,7 +6,6 @@
 
     <div id="app" class="relative min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 animate-fade-in">
         <div class="w-full max-w-7xl mx-auto mt-10 md:mt-20">
-            <!-- Header -->
             <header class="mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-white">Dasbor Laporan Harian</h1>
                 <p class="text-xl text-blue-300">Pengadilan Tata Usaha Negara Medan</p>
@@ -14,7 +13,6 @@
             </header>
 
             <main>
-                <!-- Tampilan Laporan Harian -->
                 <div id="dailyReport">
                     <div class="glass-card p-6 rounded-xl w-full mb-6">
                         <p class="text-base font-medium text-blue-300">Total Tamu Hari Ini</p>
@@ -22,7 +20,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                        <!-- Kartu Statistik -->
                         <div class="glass-card p-6 rounded-xl">
                             <div class="flex items-center justify-between">
                                 <p class="font-medium text-blue-300">Tamu Sidang</p>
@@ -105,50 +102,45 @@
                             @endforelse
                         </ul>
                     </div>
-
                 </div>
-
+                <a href="{{ route('export.harian') }}" class="mt-4 glass-card col-span-1 sm:col-span-2 lg:col-span-1 p-5 rounded-xl flex flex-col justify-center items-center text-center">
+                    Export ke Excel
+                </a>
+                
+            </main>
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
-                        // --- DOM Element Selection ---
                         const dailyReportView = document.getElementById('dailyReport');
                         const monthlyReportView = document.getElementById('monthlyReport');
                         const toggleBtn = document.getElementById('toggleReportBtn');
                         const backBtn = document.getElementById('backToDailyBtn');
                         const dateElement = document.getElementById('currentDate');
 
-                        // --- Set Today's Date in Indonesian ---
                         const setDate = () => {
                             const now = new Date();
                             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                             dateElement.textContent = "" + now.toLocaleDateString('id-ID', options);
                         };
 
-                        // --- View Toggling Logic ---
                         const showMonthlyReport = () => {
                             dailyReportView.classList.add('hidden');
-                            toggleBtn.classList.add('hidden'); // Hide the main button
+                            toggleBtn.classList.add('hidden');
                             monthlyReportView.classList.remove('hidden');
                         };
 
                         const showDailyReport = () => {
                             monthlyReportView.classList.add('hidden');
                             dailyReportView.classList.remove('hidden');
-                            toggleBtn.classList.remove('hidden'); // Show the main button again
+                            toggleBtn.classList.remove('hidden');
                         };
 
-                        // --- Event Listeners ---
                         toggleBtn.addEventListener('click', showMonthlyReport);
                         backBtn.addEventListener('click', showDailyReport);
 
-                        // --- Initializations ---
                         setDate();
 
-                        // Trigger entry animations for elements that should slide up
                         const animatedElements = document.querySelectorAll('.animate-slide-up');
                         animatedElements.forEach(el => {
-                            // By changing opacity, we allow the animation to play.
-                            // The initial state is set in the CSS.
                             el.style.opacity = '1';
                         });
                     });

@@ -6,7 +6,6 @@
 
     <div id="app" class="relative min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8 animate-fade-in">
         <div class="w-full max-w-7xl mx-auto mt-10 md:mt-20">
-            <!-- Header -->
             <header class="mb-8">
                 <h1 class="text-3xl md:text-4xl font-bold text-white">Laporan Kunjungan Bulanan</h1>
                 <p class="text-xl text-blue-300">Pengadilan Tata Usaha Negara Medan</p>
@@ -14,11 +13,15 @@
             </header>
 
             <main>
-                <!-- =================================================================== -->
-                <!-- ===================  BAGIAN LAPORAN BULANAN  ================== -->
-                <!-- =================================================================== -->
+                 <form action="{{ route('export.bulanan') }}" method="GET" class="mb-6 flex items-center gap-4">
+                    <label for="bulan" class="text-white text-sm">Pilih Bulan:</label>
+                    <input type="month" name="bulan" id="bulan" required class="glass-card col-span-1 sm:col-span-2 lg:col-span-1 p-5 rounded-xl flex flex-col justify-center items-center text-center">
+                    
+                    <button type="submit" class="glass-card col-span-1 sm:col-span-2 lg:col-span-1 p-5 rounded-xl flex flex-col justify-center items-center text-center">
+                        Export Bulanan
+                    </button>
+                </form>
                 <div id="monthlyReport">
-                    <!-- Ringkasan Statistik Bulanan -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
                         <div
                             class="glass-card col-span-1 sm:col-span-2 lg:col-span-1 p-5 rounded-xl flex flex-col justify-center items-center text-center">
@@ -43,7 +46,6 @@
                         </div>
                     </div>
 
-                    <!-- Desain Tabel Minimalis Baru -->
                     <div class="w-full overflow-x-auto glass-card rounded-xl p-2">
                         <table class="min-w-full text-sm text-left">
                             <thead class="text-xs text-blue-300 uppercase tracking-wider">
@@ -89,7 +91,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // --- DOM Element Selection ---
             const dailyReportView = document.getElementById('dailyReport');
             const monthlyReportView = document.getElementById('monthlyReport');
             const toggleBtn = document.getElementById('toggleReportBtn');
@@ -98,51 +99,34 @@
 
             document.addEventListener('DOMContentLoaded', function () {
                 const dateElement = document.getElementById('currentDate');
-
-                // --- Fungsi untuk Mengatur Tanggal Hari Ini ---
                 const setDate = () => {
                     const now = new Date();
-                    // Menampilkan nama bulan untuk konteks laporan bulanan
                     const options = { year: 'numeric', month: 'long' };
                     dateElement.textContent = "Laporan untuk Bulan " + now.toLocaleDateString('id-ID', options);
                 };
-
-                // --- Inisialisasi Saat Halaman Dimuat ---
                 setDate();
             });
-
-            // --- Set Today's Date in Indonesian ---
             const setDate = () => {
                 const now = new Date();
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 dateElement.textContent = "" + now.toLocaleDateString('id-ID', options);
             };
-
-            // --- View Toggling Logic ---
             const showMonthlyReport = () => {
                 dailyReportView.classList.add('hidden');
-                toggleBtn.classList.add('hidden'); // Hide the main button
+                toggleBtn.classList.add('hidden');
                 monthlyReportView.classList.remove('hidden');
             };
 
             const showDailyReport = () => {
                 monthlyReportView.classList.add('hidden');
                 dailyReportView.classList.remove('hidden');
-                toggleBtn.classList.remove('hidden'); // Show the main button again
+                toggleBtn.classList.remove('hidden');
             };
-
-            // --- Event Listeners ---
             toggleBtn.addEventListener('click', showMonthlyReport);
             backBtn.addEventListener('click', showDailyReport);
-
-            // --- Initializations ---
             setDate();
-
-            // Trigger entry animations for elements that should slide up
             const animatedElements = document.querySelectorAll('.animate-slide-up');
             animatedElements.forEach(el => {
-                // By changing opacity, we allow the animation to play.
-                // The initial state is set in the CSS.
                 el.style.opacity = '1';
             });
         });

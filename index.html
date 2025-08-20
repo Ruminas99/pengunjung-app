@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BUTET</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0a18;
+            /* Warna dasar jika gradien tidak didukung */
+            overflow-x: hidden;
+        }
+
+        /* Latar Belakang Gradien Jala (Mesh Gradient) yang Bergerak */
+        .animated-gradient-bg {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background:
+                radial-gradient(at 30% 70%, hsla(210, 100%, 60%, 0.45) 0px, transparent 60%),
+                radial-gradient(at 70% 30%, hsla(200, 100%, 70%, 0.4) 0px, transparent 60%),
+                radial-gradient(at 50% 50%, hsla(220, 100%, 55%, 0.3) 0px, transparent 70%),
+                radial-gradient(at 80% 80%, hsla(195, 100%, 65%, 0.2) 0px, transparent 60%);
+            background-size: 200% 200%;
+            animation: gradient-move 25s ease infinite;
+        }
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        /* Animasi kustom */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-pop-in {
+            animation: popIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        .stagger-1 {
+            animation-delay: 0.4s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.5s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.6s;
+        }
+
+        .stagger-4 {
+            animation-delay: 0.7s;
+        }
+
+        /* Efek Kilau Interaktif pada Kartu */
+        .interactive-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            /* Sesuai dengan rounded-xl */
+            padding: 1px;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(96, 165, 250, 0.4), transparent 80%);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .interactive-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes gradient-move {
+
+            0%,
+            100% {
+                background-position: 0% 0%;
+            }
+
+            50% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* Animasi kustom */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Efek Kartu Kaca Interaktif */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 60, 120, 0.25), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+        }
+
+        .dashboard-button {
+            @apply text-white font-semibold py-4 px-6 rounded-xl transition-transform duration-300 transform hover:scale-105 active:scale-95 shadow-md animate__animated animate__fadeInUp text-lg;
+        }
+
+         @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            @keyframes popIn {
+                from { opacity: 0; transform: scale(0.95); }
+                to { opacity: 1; transform: scale(1); }
+            }
+
+            /* Menerapkan animasi dengan delay yang berbeda */
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+            
+            .animate-pop-in {
+                animation: popIn 0.6s ease-out forwards;
+                opacity: 0; /* Mulai dari transparan */
+            }
+
+            .stagger-1 { animation-delay: 0.2s; }
+            .stagger-2 { animation-delay: 0.3s; }
+            .stagger-3 { animation-delay: 0.4s; }
+            .stagger-4 { animation-delay: 0.5s; }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-900 to-slate-900 text-gray-100">
+    <main id="main-content">
+        <div class="animated-gradient-bg"></div>
+
+        <div class="relative min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in">
+        
+            <!-- Header -->
+            <header class="mb-10 text-center">
+                <img src="public/image/logo-beranda.png" alt="Logo Si Butet" class="h-32 sm:h-70 mx-auto shadow-2xl shadow-blue-500/20 ">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mt-6 tracking-tight">Pengadilan Tata Usaha Negara Medan</h1>
+            </header>
+
+            <!-- Konten Utama -->
+            <main class="w-full max-w-4xl animate-pop-in" style="animation-delay: 0.2s;">
+                <h2 class="text-3xl font-bold text-center text-white mb-8">Pilih Tujuan Kunjungan Anda</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Tombol Pilihan -->
+                    <a href="pihak.html" class="interactive-card group p-6 rounded-xl transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-pop-in stagger-1">
+                        <div class="flex items-center gap-5">
+                            <div class="bg-white/10 text-sky-300 group-hover:text-white p-3 rounded-lg transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><path d="m2 16 20 6-20 6Z"/><path d="M12.5 10.5 6 5"/><path d="m2 16 6-11 14 5-20 6Z"/><path d="M6 5v.01"/><path d="M12.5 10.5v0"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Tamu Sidang</h3>
+                                <p class="text-blue-300 group-hover:text-blue-100 transition-colors duration-300">Untuk menghadiri persidangan.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="ptsp.html" class="interactive-card group p-6 rounded-xl transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-pop-in stagger-2">
+                        <div class="flex items-center gap-5">
+                            <div class="bg-white/10 text-sky-300 group-hover:text-white p-3 rounded-lg transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Layanan PTSP</h3>
+                                <p class="text-blue-300 group-hover:text-blue-100 transition-colors duration-300">Pendaftaran, informasi, dan lainnya.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="dinas.html" class="interactive-card group p-6 rounded-xl transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-pop-in stagger-3">
+                        <div class="flex items-center gap-5">
+                            <div class="bg-white/10 text-sky-300 group-hover:text-white p-3 rounded-lg transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Tamu Dinas</h3>
+                                <p class="text-blue-300 group-hover:text-blue-100 transition-colors duration-300">Untuk keperluan kedinasan.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="mahasiswa.html" class="interactive-card group p-6 rounded-xl transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/30 animate-pop-in stagger-4">
+                        <div class="flex items-center gap-5">
+                            <div class="bg-white/10 text-sky-300 group-hover:text-white p-3 rounded-lg transition-colors duration-300">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.084a1 1 0 0 0 0 1.838l8.57 4.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Tamu Mahasiswa</h3>
+                                <p class="text-blue-300 group-hover:text-blue-100 transition-colors duration-300">Untuk riset, magang, atau studi.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </main>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const currentURL = window.location.href;
+            const mainContent = document.getElementById('main-content');
+
+            navLinks.forEach(link => {
+                const linkURL = link.getAttribute('href');
+                if (currentURL === linkURL) {
+                    link.classList.add('bg-white', 'text-gray-800');
+                    link.classList.remove('text-white');
+                } else {
+                    link.classList.add('text-white', 'hover:bg-white/20');
+                }
+
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const destination = this.href;
+
+                    if (destination === window.location.href || destination.endsWith('#')) {
+                        return;
+                    }
+
+                    mainContent.classList.add('page-exit-animation');
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 500);
+                });
+            });
+        });
+
+        // JavaScript untuk efek kilau interaktif yang mengikuti kursor
+        document.querySelectorAll('.interactive-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+
+</html>
